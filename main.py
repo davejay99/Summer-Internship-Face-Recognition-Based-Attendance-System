@@ -11,9 +11,10 @@ def title_bar():
     os.system('cls')  # for windows
 
     # title of the program
-
+    print("\t#############Author Name:JAY DAVE#################")
+    print("\t##################DA-IICT#########################")
     print("\t##################################################")
-    print("\t####### Face Recognition Attendance System #######")
+    print("\t#######Face Recognition Attendance System ########")
     print("\t##################################################")
 
 
