@@ -1,1 +1,0 @@
-mydb=mysql.connector.connect(host="localhost",user="jay",passwd="dj141199",database="fras")
