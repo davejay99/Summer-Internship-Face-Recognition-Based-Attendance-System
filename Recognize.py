@@ -8,7 +8,7 @@ import mysql.connector
 
 mydb=mysql.connector.connect(host="localhost",user="mysqluser",passwd="password",database="db_name")
 mycursor=mydb.cursor();
-print("connection id is "+str(mydb.connection_id));
+print("connection id for MySQL is "+str(mydb.connection_id));
 
 
 def dbEntry(t):
@@ -50,7 +50,7 @@ def recognize_attendence():
                 timeStamp = datetime.datetime.fromtimestamp(
                     ts).strftime('%H:%M:%S')
                 aa = df.loc[df['Id'] == Id]['Name'].values
-                tt = str(Id)+"-"+aa
+                tt = str(Id)+":"+aa
                 attendance.loc[len(attendance)] = [Id, aa, date, timeStamp]
                 dbEntry((Id, aa, date, timeStamp,course))
 
@@ -61,9 +61,10 @@ def recognize_attendence():
                 noOfFile = len(os.listdir("ImagesUnknown"))+1
                 cv2.imwrite("ImagesUnknown"+os.sep+"Image"+str(noOfFile) +
                             ".jpg", im[y:y+h, x:x+w])
-            lossInPercentage = rounf(conf)
+            lossInPercentage = round(conf)
+            percentageSign = "%"
             accuracyInPercentage = 100 - lossInPercentage
-            tt = tt+" "+ str(accuracyInPercentage)+"%"
+            tt = tt+" "+ str(accuracyInPercentage)+percentageSign
             cv2.putText(im, str(tt), (x, y+h), font, 1, (255, 255, 255), 2)
         attendance = attendance.drop_duplicates(subset=['Id'], keep='first')
         cv2.imshow('im', im)
@@ -80,6 +81,6 @@ def recognize_attendence():
     cam.release()
     cv2.destroyAllWindows()
 
-    print("Attendance Successfull")
+    print("Attendance was taken Successfully. You can check Attendance folder.")
     # fileuploadsql.insertBLOB(5, "attendancefile", "D:\\FRAS\\TrainingImage\\Aamir.3.1.jpg",
     #       "D:\\FRAS\\Attendance\\"+str(fileName))
