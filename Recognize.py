@@ -61,6 +61,9 @@ def recognize_attendence():
                 noOfFile = len(os.listdir("ImagesUnknown"))+1
                 cv2.imwrite("ImagesUnknown"+os.sep+"Image"+str(noOfFile) +
                             ".jpg", im[y:y+h, x:x+w])
+            lossInPercentage = rounf(conf)
+            accuracyInPercentage = 100 - lossInPercentage
+            tt = tt+" "+ str(accuracyInPercentage)+"%"
             cv2.putText(im, str(tt), (x, y+h), font, 1, (255, 255, 255), 2)
         attendance = attendance.drop_duplicates(subset=['Id'], keep='first')
         cv2.imshow('im', im)
